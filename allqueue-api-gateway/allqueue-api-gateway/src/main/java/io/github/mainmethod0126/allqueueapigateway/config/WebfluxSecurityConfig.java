@@ -16,7 +16,10 @@ public class WebfluxSecurityConfig {
         http
                 .authorizeExchange(exchanges -> exchanges
                         .anyExchange().authenticated())
-                .oauth2Login(Customizer.withDefaults());
+                .oauth2Login(oauthLogin -> {
+                    oauthLogin.authenticationSuccessHandler()
+                });
         return http.build();
     }
+
 }

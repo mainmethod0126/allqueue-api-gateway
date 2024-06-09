@@ -13,6 +13,7 @@ public class UserController {
     @GetMapping("/user/info")
     public Mono<String> getCurrentUserInfo(
             @AuthenticationPrincipal OAuth2AuthenticationToken authenticationToken) {
+
         return Mono.just("Hello, " + authenticationToken.getPrincipal().getName());
     }
 
