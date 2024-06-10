@@ -1,0 +1,95 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.0'
+	id 'io.spring.dependency-management' version '1.1.5'
+  	id 'com.google.protobuf' version "0.9.4"
+}
+
+group = 'allqueue'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 21
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.3"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.64.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc { option '@generated=omit' }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/proto'
+			srcDir 'build/generated/source/proto/main/java'
+			srcDir 'build/generated/source/proto/main/grpc'
+        }
+    }
+}
+
+tasks.named('processResources') {
+    dependsOn 'generateProto'
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+compileJava.dependsOn generateProto
+
+dependencies {
+	// https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
+	implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
+
+
+	// https://mvnrepository.com/artifact/io.grpc/grpc-all
+	implementation 'io.grpc:grpc-all:1.64.0'
+
+
+	// https://mvnrepository.com/artifact/io.grpc/grpc-netty
+	implementation 'io.grpc:grpc-netty:1.64.0'
+
+
+
+	// https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
+	implementation 'com.google.protobuf:protobuf-java:3.25.3'
+
+
+	// https://mvnrepository.com/artifact/net.devh/grpc-server-spring-boot-starter
+	implementation 'net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
