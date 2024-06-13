@@ -36,9 +36,18 @@ protobuf {
             artifact = 'io.grpc:protoc-gen-grpc-java:1.64.0'
         }
     }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc { option '@generated=omit' }
+    // generateProtoTasks {
+    //     all()*.plugins {
+    //         grpc { option '@generated=omit' }
+    //     }
+    // }
+	generateProtoTasks {
+        all().configureEach { task ->
+			task.plugins {
+				grpc { option '@generated=omit' }
+			}
+			task.generateDescriptorSet = true
+			task.descriptorSetOptions.path = "${projectDir}/build/descriptors/${task.sourceSet.name}.dsc"
         }
     }
 }
