@@ -8,7 +8,4 @@ logging:
 
 grpc:
   server:
-    port: 9191
-    transport:
-      netty:
-        http2: true # HTTP/2 활성화
+    port: 9393

@@ -3,11 +3,11 @@ package io.github.mainmethod0126.allqueueapigateway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+// import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 
 @SpringBootApplication
 @Configuration
-@EnableWebFluxSecurity
+// @EnableWebFluxSecurity
 public class AllqueueApiGatewayApplication {
 
 	public static void main(String[] args) {

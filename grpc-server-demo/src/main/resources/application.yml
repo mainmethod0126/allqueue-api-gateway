@@ -1,6 +1,6 @@
 spring:
   application:
-    name: allqueue-api-gateway
+    name: grpc-server-demo
   profiles:
     active: dev
     include:

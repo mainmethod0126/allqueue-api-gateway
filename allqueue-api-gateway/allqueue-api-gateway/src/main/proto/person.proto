@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_package = "com.example.grpc";
+option java_multiple_files = true;
+
+service Person {
+    rpc getPersonInfo (PersonRequest) returns (PersonResponse);
+}
+
+message PersonRequest {
+    string name = 1;
+}
+
+message PersonResponse {
+    string age = 1;
+    string gender = 2;
+    string address = 3;
+}
