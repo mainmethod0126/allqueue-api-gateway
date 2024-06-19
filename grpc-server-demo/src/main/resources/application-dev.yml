@@ -7,5 +7,10 @@ logging:
         security: DEBUG
 
 grpc:
+  enableReflection: true
+  enabled: true
+  security:
+    cert-chain: classpath:certificate.pem
+    private-key: classpath:cert.key
   server:
     port: 9393

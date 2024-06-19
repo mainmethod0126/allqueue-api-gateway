@@ -6,9 +6,27 @@ logging:
         web: DEBUG
         security: DEBUG
 
+server:
+  http2:
+    enabled: true
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:keystore.p12
+    key-store-password: password
+    key-password: password
+    enabled: true
+
 grpc:
   server:
     port: 9191
-    transport:
-      netty:
-        http2: true # HTTP/2 활성화
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: json-grpc
+          uri: https://[::1]:9393
+          predicates:
+            - Path=/json/**
+          filters:
+            - JSONToGRPCFilter

@@ -1,13 +1,13 @@
 
-µ
-hello.proto""
-HelloRequest
-name (	Rname")
-HelloResponse
-message (	Rmessage29
-HelloService)
-sayHello.HelloRequest.HelloResponseB
-com.example.grpcPbproto3
+ 
+hello.protocom.example.grpcserver.hello"H
+HelloRequest
+	firstName (	R	firstName
+lastName (	RlastName"+
+HelloResponse
+greeting (	Rgreeting2p
+HelloService`
+hello*.com.example.grpcserver.hello.HelloRequest+.com.example.grpcserver.hello.HelloResponseBPbproto3
 ã
 person.proto"#
 PersonRequest

@@ -10,17 +10,23 @@ import net.devh.boot.grpc.server.service.GrpcService;
 @GrpcService
 public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
 
-    @Override
-    public void sayHello(HelloRequest request, StreamObserver<HelloResponse> responseObserver) {
-        String name = request.getName();
-        String message = "Hello, " + name;
+        @Override
+        public void hello(
+                        HelloRequest request, StreamObserver<HelloResponse> responseObserver) {
 
-        HelloResponse response = HelloResponse.newBuilder()
-                .setMessage(message)
-                .build();
+                String greeting = new StringBuilder()
+                                .append("Hello, ")
+                                .append(request.getFirstName())
+                                .append(" ")
+                                .append(request.getLastName())
+                                .toString();
+                System.out.println(greeting);
 
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
+                HelloResponse response = HelloResponse.newBuilder()
+                                .setGreeting(greeting)
+                                .build();
 
+                responseObserver.onNext(response);
+                responseObserver.onCompleted();
+        }
 }

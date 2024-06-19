@@ -8,9 +8,9 @@ service HelloService {
 }
 
 message HelloRequest {
-    string name = 1;
+    optional string name = 1;
 }
 
 message HelloResponse {
-    string message = 1;
+    optional string message = 1;
 }
