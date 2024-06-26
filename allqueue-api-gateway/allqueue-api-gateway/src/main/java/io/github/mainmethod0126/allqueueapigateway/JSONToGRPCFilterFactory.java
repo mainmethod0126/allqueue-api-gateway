@@ -1,8 +1,8 @@
 package io.github.mainmethod0126.allqueueapigateway;
 
-import com.example.grpcserver.hello.HelloRequest;
-import com.example.grpcserver.hello.HelloResponse;
-import com.example.grpcserver.hello.HelloServiceGrpc;
+import com.example.grpc.HelloRequest;
+import com.example.grpc.HelloResponse;
+import com.example.grpc.HelloServiceGrpc;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.grpc.ManagedChannel;
@@ -85,8 +85,6 @@ public class JSONToGRPCFilterFactory extends AbstractGatewayFilterFactory<Object
 
             URI requestURI = exchange.getRequest().getURI();
             ManagedChannel channel = createSecuredChannel(requestURI.getHost(), 9393);
-
-            channel.
 
             return getDelegate().writeWith(deserializeJSONRequest()
                     .map(jsonRequest -> {
